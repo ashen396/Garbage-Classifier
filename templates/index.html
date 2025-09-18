@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Garbage Classification</title>
+    <style>
+        body { font-family: Arial; text-align: center; padding: 50px; }
+        .loader { display: none; margin: 20px auto; }
+        img.preview { max-width: 300px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h2>Upload an image to classify</h2>
+    <form method="post" enctype="multipart/form-data" onsubmit="showLoader()">
+        <input type="file" name="image" accept="image/*" required>
+        <br><br>
+        <button type="submit">Predict</button>
+    </form>
+
+    <div class="loader" id="loader">
+        <img src="{{ url_for('static', filename='spinner.gif') }}" width="100">
+        <p>Predicting...</p>
+    </div>
+
+    {% if prediction %}
+        <h3>Predicted class: {{ prediction }}</h3>
+    {% endif %}
+
+    <script>
+        function showLoader() {
+            document.getElementById('loader').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
